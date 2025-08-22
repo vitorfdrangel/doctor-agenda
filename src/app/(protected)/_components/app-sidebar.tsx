@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -67,6 +67,8 @@ export function AppSidebar() {
     });
   };
 
+  const session = authClient.useSession();
+
   return (
     <Sidebar>
       <SidebarHeader className="border-b p-4">
@@ -97,7 +99,19 @@ export function AppSidebar() {
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline">Clínica</Button>
+                <SidebarMenuButton size={"lg"}>
+                  <Avatar>
+                    <AvatarFallback>
+                      {session.data?.user?.userName.charAt(0)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm">{session.data?.user?.clinicName}</p>
+                    <p className="text-muted-foreground text-sm">
+                      {session.data?.user?.email}
+                    </p>
+                  </div>
+                </SidebarMenuButton>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent>
