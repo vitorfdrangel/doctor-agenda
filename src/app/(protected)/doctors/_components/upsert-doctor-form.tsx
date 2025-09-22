@@ -33,6 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { doctorsTable } from "@/db/schema";
 
 import { medicalSpecialties } from "../_constants";
 
@@ -58,17 +59,18 @@ const formSchema = z
 
 interface UpsertDoctorFormProps {
   onSuccess?: () => void;
+  doctor?: typeof doctorsTable.$inferSelect;
 }
 
-const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
+const UpsertDoctorForm = ({ onSuccess, doctor }: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      specialty: "",
+      name: doctor?.name ?? "",
+      specialty: doctor?.specialty ?? "",
       appointmentPrice: 0,
-      availableFromWeekDay: "1",
-      availableToWeekDay: "5",
+      availableFromWeekDay: doctor?.availableFromWeekDay.toString() ?? "1",
+      availableToWeekDay: doctor?.availableToWeekDay.toString() ?? "5",
       availableFromTime: "",
       availableToTime: "",
     },
