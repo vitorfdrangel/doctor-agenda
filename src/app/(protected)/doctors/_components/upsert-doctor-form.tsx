@@ -6,7 +6,19 @@ import { NumericFormat } from "react-number-format";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { deleteDoctor } from "@/actions/delete-doctor";
 import { upsertDoctor } from "@/actions/upsert-doctor";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
   DialogContent,
@@ -60,14 +72,9 @@ const formSchema = z
 interface UpsertDoctorFormProps {
   onSuccess?: () => void;
   doctor?: typeof doctorsTable.$inferSelect;
-  update?: boolean;
 }
 
-const UpsertDoctorForm = ({
-  onSuccess,
-  doctor,
-  update,
-}: UpsertDoctorFormProps) => {
+const UpsertDoctorForm = ({ onSuccess, doctor }: UpsertDoctorFormProps) => {
   const form = useForm<z.infer<typeof formSchema>>({
     shouldUnregister: true,
     resolver: zodResolver(formSchema),
@@ -86,7 +93,7 @@ const UpsertDoctorForm = ({
 
   const upsertDoctorAction = useAction(upsertDoctor, {
     onSuccess: () => {
-      if (update) {
+      if (doctor) {
         toast.success("Médico atualizado com sucesso");
       } else {
         toast.success("Médico adicionado com sucesso");
@@ -101,6 +108,24 @@ const UpsertDoctorForm = ({
     },
   });
 
+  const deleteDoctorAction = useAction(deleteDoctor, {
+    onSuccess: () => {
+      toast.success("Médico deletado com sucesso");
+      onSuccess?.();
+    },
+    onError: () => {
+      toast.error("Erro ao deletar médico");
+    },
+  });
+
+  const handleDeleteDoctor = () => {
+    if (!doctor) {
+      return;
+    }
+
+    deleteDoctorAction.execute({ id: doctor.id });
+  };
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     upsertDoctorAction.execute({
       ...values,
@@ -114,9 +139,9 @@ const UpsertDoctorForm = ({
   return (
     <DialogContent>
       <DialogHeader>
-        <DialogTitle>{update ? doctor?.name : "Adicionar Médico"}</DialogTitle>
+        <DialogTitle>{doctor ? doctor?.name : "Adicionar Médico"}</DialogTitle>
         <DialogDescription>
-          {update
+          {doctor
             ? "Edite as informações do médico"
             : "Insira as informações do médico"}
         </DialogDescription>
@@ -401,11 +426,36 @@ const UpsertDoctorForm = ({
           />
 
           <DialogFooter>
+            {doctor && (
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant="outline">Deletar</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      Quer mesmo deletar este médico?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Esta ação não pode ser desfeita. Isso irá deletar
+                      permanentemente sua conta e remover seus dados de nossos
+                      servidores.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleDeleteDoctor}>
+                      Deletar
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            )}
             <Button type="submit" disabled={upsertDoctorAction.isPending}>
               {upsertDoctorAction.isPending && (
                 <Loader2 className="mr-2 animate-spin" />
               )}
-              {update ? "Atualizar" : "Adicionar"}
+              {doctor ? "Atualizar" : "Adicionar"}
             </Button>
           </DialogFooter>
         </form>
