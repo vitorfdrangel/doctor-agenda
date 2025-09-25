@@ -152,7 +152,7 @@ const UpsertPatientForm = ({
                   <PatternFormat
                     format="(##) #####-####"
                     mask="_"
-                    placeholder="(11) 99999-9999"
+                    placeholder="(21) 99999-9999"
                     value={field.value}
                     onValueChange={(value) => {
                       field.onChange(value.value);
