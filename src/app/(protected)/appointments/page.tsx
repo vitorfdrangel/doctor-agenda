@@ -33,9 +33,11 @@ const AppointmentsPage = async () => {
   const [patients, doctors, appointments] = await Promise.all([
     db.query.patientsTable.findMany({
       where: eq(patientsTable.clinicId, session.user.clinicId),
+      orderBy: patientsTable.name,
     }),
     db.query.doctorsTable.findMany({
       where: eq(doctorsTable.clinicId, session.user.clinicId),
+      orderBy: doctorsTable.name,
     }),
     db.query.appointmentsTable.findMany({
       where: eq(appointmentsTable.clinicId, session.user.clinicId),
