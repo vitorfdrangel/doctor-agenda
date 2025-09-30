@@ -1,9 +1,18 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import {
+  PageActions,
+  PageContainer,
+  PageContent,
+  PageDescription,
+  PageHeader,
+  PageHeaderContent,
+  PageTitle,
+} from "@/components/ui/page-container";
 import { auth } from "@/lib/auth";
 
-import SignOutButton from "./_components/sign-out-button";
+import { DatePicker } from "./_components/date-picker";
 
 const DashboardPage = async () => {
   const session = await auth.api.getSession({
@@ -20,12 +29,20 @@ const DashboardPage = async () => {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      <h2>{session?.user?.name}</h2>
-      <h2>{session?.user?.email}</h2>
-      <h2>{session?.user?.clinicName}</h2>
-
-      <SignOutButton />
+      <PageContainer>
+        <PageHeader>
+          <PageHeaderContent>
+            <PageTitle>Dashboard</PageTitle>
+            <PageDescription>Bem-vindo, {session.user.name}</PageDescription>
+          </PageHeaderContent>
+          <PageActions>
+            <DatePicker />
+          </PageActions>
+        </PageHeader>
+        <PageContent>
+          <></>
+        </PageContent>
+      </PageContainer>
     </div>
   );
 };
