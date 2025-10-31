@@ -10,23 +10,15 @@ export const createStripeCheckout = actionClient.action(async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
   if (!session?.user) {
-    throw new Error("Usuário não autenticado");
+    throw new Error("Unauthorized");
   }
-
-  if (!session?.user.clinicId) {
-    throw new Error("Clínica não cadastrada");
-  }
-
   if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error("Stripe secret key not found");
   }
-
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: "2025-05-28.basil",
   });
-
   const { id: sessionId } = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "subscription",
@@ -44,7 +36,6 @@ export const createStripeCheckout = actionClient.action(async () => {
       },
     ],
   });
-
   return {
     sessionId,
   };

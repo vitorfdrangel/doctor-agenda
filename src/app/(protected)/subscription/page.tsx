@@ -1,3 +1,5 @@
+"use server";
+
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -20,9 +22,11 @@ const SubscriptionPage = async () => {
   if (!session) {
     redirect("/login");
   }
+
   if (!session.user.clinicId) {
     redirect("/clinic-form");
   }
+
   return (
     <PageContainer>
       <PageHeader>
@@ -32,7 +36,10 @@ const SubscriptionPage = async () => {
         </PageHeaderContent>
       </PageHeader>
       <PageContent>
-        <SubscriptionPlan />
+        <SubscriptionPlan
+          active={session.user.plan === "essential"}
+          userEmail={session.user.email}
+        />
       </PageContent>
     </PageContainer>
   );
