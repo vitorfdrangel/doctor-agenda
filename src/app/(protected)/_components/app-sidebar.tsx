@@ -82,6 +82,7 @@ export function AppSidebar() {
           height={30}
         />
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Menu principal</SidebarGroupLabel>
