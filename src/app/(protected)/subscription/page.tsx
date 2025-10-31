@@ -22,9 +22,11 @@ const SubscriptionPage = async () => {
   if (!session) {
     redirect("/login");
   }
-
   if (!session.user.clinicId) {
     redirect("/clinic-form");
+  }
+  if (!session.user.plan) {
+    redirect("/new-subscription");
   }
 
   return (

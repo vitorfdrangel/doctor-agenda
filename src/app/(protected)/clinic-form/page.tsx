@@ -21,6 +21,10 @@ const ClinicFormPage = async () => {
     redirect("/authentication");
   }
 
+  if (!session.user.plan) {
+    redirect("/new-subscription");
+  }
+
   return (
     <Dialog open>
       <DialogContent className="sm:max-w-[425px]">
