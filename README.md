@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏥 VRL - Doctors: SaaS para Clínicas Médicas
 
-## Getting Started
+O **VRL - Doctors** é uma aplicação **SaaS (Software as a Service)** desenvolvida para clínicas médicas que desejam gerenciar seus profissionais, pacientes e agendamentos de forma simples, moderna e segura.
 
-First, run the development server:
+Com o VRL - Doctors, é possível registrar médicos e pacientes, agendar consultas, processar pagamentos online e acompanhar o funcionamento da clínica em tempo real.
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+O projeto foi desenvolvido com a stack moderna do ecossistema **Next.js** e ferramentas robustas para autenticação, banco de dados e pagamentos:
+
+- **Next.js** — Framework React para renderização híbrida (SSR/SSG)
+- **TailwindCSS** — Estilização rápida e responsiva
+- **PostgreSQL** — Banco de dados relacional
+- **Drizzle ORM** — Mapeamento e migrações tipadas e seguras
+- **Better Auth** — Autenticação moderna e segura para aplicações Next.js
+- **Stripe** — Integração de pagamentos e gestão de planos de assinatura
+
+---
+
+## 🩺 Funcionalidades Principais
+
+- 👨‍⚕️ **Cadastro de Médicos**  
+  Permite registrar médicos com informações de nome, especialidade, preço da consulta e horários disponíveis.
+
+- 👩‍🦰 **Cadastro de Pacientes**  
+  Armazena dados pessoais de forma segura e organizada.
+
+- 📅 **Agendamento de Consultas**  
+  Interface intuitiva para marcar, visualizar e gerenciar consultas médicas.
+
+- 💳 **Pagamentos via Stripe**  
+  Suporte a pagamentos e planos de assinatura para clínicas e profissionais.
+
+- 🔐 **Autenticação Segura (Better Auth)**  
+  Controle de acesso somente para administradores.
+
+- 📊 **Dashboard Interativa com Gráficos**  
+  Painel administrativo com **gráficos dinâmicos** que facilitam a visualização de métricas da clínica, como número de consultas, médicos com maior número de consultas, especialidades mais procuradas, receita mensal, etc.
+
+---
+
+## ⚙️ Instalação e Configuração
+
+1. **Clone o repositório:**
+
+```bash
+   git clone https://github.com/seu-usuario/medcare.git
+   cd medcare
+```
+
+2. Instale as dependências:
+
+```bash
+npm install --legacy-peer-deps
+```
+
+3. Configure as variáveis de ambiente:
+   Crie um arquivo .env.local na raiz do projeto com as chaves:
+
+```bash
+DATABASE_URL=""
+BETTER_AUTH_SECRET=""
+BETTER_AUTH_URL=""
+
+GOOGLE_CLIENT_ID=""
+GOOGLE_CLIENT_SECRET=""
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
+STRIPE_SECRET_KEY=""
+STRIPE_ESSENTIAL_PLAN_PRICE_ID=""
+STRIPE_WEBHOOK_SECRET=""
+
+NEXT_PUBLIC_APP_URL=""
+NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL=""
+```
+
+4. Execute as migrações do banco de dados:
+
+```bash
+npm run db:push
+```
+
+5. Inicie o servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Acesse o app em: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+💰 Planos e Pagamentos
 
-## Learn More
+O sistema utiliza o Stripe para processar pagamentos de forma segura.
+Os administradores podem definir planos de assinatura para clínicas e profissionais.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🔒 Segurança e Privacidade
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dados sensíveis são criptografados.
 
-## Deploy on Vercel
+Controle de acesso baseado em papéis.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Conformidade com boas práticas de LGPD (Lei Geral de Proteção de Dados).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+📄 Licença
+
+Este projeto está sob a licença MIT.
