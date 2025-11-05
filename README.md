@@ -1,5 +1,7 @@
 # 🏥 VRL - Doctors: SaaS para Clínicas Médicas
 
+<img src="public/dashboard-doctors.png" alt="dashboard vrl-doctors" >
+
 O **VRL - Doctors** é uma aplicação **SaaS (Software as a Service)** desenvolvida para clínicas médicas que desejam gerenciar seus profissionais, pacientes e agendamentos de forma simples, moderna e segura.
 
 Com o VRL - Doctors, é possível registrar médicos e pacientes, agendar consultas, processar pagamentos online e acompanhar o funcionamento da clínica em tempo real.
@@ -60,20 +62,20 @@ npm install --legacy-peer-deps
    Crie um arquivo .env.local na raiz do projeto com as chaves:
 
 ```bash
-DATABASE_URL=""
-BETTER_AUTH_SECRET=""
-BETTER_AUTH_URL=""
+DATABASE_URL="sua_url_mongodb"
+BETTER_AUTH_SECRET="sua_senha_better-auth"
+BETTER_AUTH_URL="http://localhost:3000"
 
-GOOGLE_CLIENT_ID=""
-GOOGLE_CLIENT_SECRET=""
+GOOGLE_CLIENT_ID="sua_google_client_id"
+GOOGLE_CLIENT_SECRET="sua_google_client_secret"
 
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=""
-STRIPE_SECRET_KEY=""
-STRIPE_ESSENTIAL_PLAN_PRICE_ID=""
-STRIPE_WEBHOOK_SECRET=""
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="sua_stripe_publishable_key"
+STRIPE_SECRET_KEY="sua_stripe_secret_key"
+STRIPE_ESSENTIAL_PLAN_PRICE_ID="stripe_id_do_produto"
+STRIPE_WEBHOOK_SECRET="webhook_gerado"
 
-NEXT_PUBLIC_APP_URL=""
-NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL=""
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL="stripe_url_do_portal_do_cliente"
 ```
 
 4. Execute as migrações do banco de dados:
