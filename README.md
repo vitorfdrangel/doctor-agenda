@@ -115,4 +115,4 @@ Conformidade com boas práticas de LGPD (Lei Geral de Proteção de Dados).
 
 Este projeto está sob a licença MIT.
 
-Acesse o Saas clicando no link: (vrl-doctors)[https://vrl-doctors.vercel.app]
+Acesse o Saas clicando no link: [vrl-doctors](https://vrl-doctors.vercel.app/)
