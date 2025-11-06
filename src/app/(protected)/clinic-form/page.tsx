@@ -21,6 +21,10 @@ const ClinicFormPage = async () => {
     redirect("/authentication");
   }
 
+  if (session.user.clinicId) {
+    redirect("/dashboard");
+  }
+
   if (!session.user.plan) {
     redirect("/new-subscription");
   }

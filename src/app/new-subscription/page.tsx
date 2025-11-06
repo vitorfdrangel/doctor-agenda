@@ -10,8 +10,13 @@ export default async function Home() {
     headers: await headers(),
   });
   if (!session) {
-    redirect("/login");
+    redirect("/authentication");
   }
+
+  if (session.user.clinicId) {
+    redirect("/dashboard");
+  }
+
   if (session.user.plan) {
     redirect("/dashboard");
   }

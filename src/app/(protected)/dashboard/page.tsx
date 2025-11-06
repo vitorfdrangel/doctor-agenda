@@ -41,7 +41,7 @@ const DashboardPage = async ({ searchParams }: DashboardPageProps) => {
   if (!session.user.clinicId) {
     redirect("/clinic-form");
   }
-  if (!session.user.plan) {
+  if (!session.user.plan && !session.user.clinicId) {
     redirect("/new-subscription");
   }
 
