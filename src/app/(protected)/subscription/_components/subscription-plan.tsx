@@ -50,7 +50,6 @@ export function SubscriptionPlan({
     "Agendamentos ilimitados",
     "Métricas básicas",
     "Cadastro de pacientes",
-    "Confirmação manual",
     "Suporte via e-mail",
   ];
 

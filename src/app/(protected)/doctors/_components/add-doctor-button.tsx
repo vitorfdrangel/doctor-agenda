@@ -4,11 +4,22 @@ import { Plus } from "lucide-react";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import UpsertDoctorForm from "./upsert-doctor-form";
 
-const AddDoctorButton = () => {
+interface doctorExceededProps {
+  exceeded: boolean;
+}
+
+const AddDoctorButton = ({ exceeded }: doctorExceededProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -18,7 +29,19 @@ const AddDoctorButton = () => {
         </Button>
       </DialogTrigger>
 
-      <UpsertDoctorForm onSuccess={() => setIsOpen(false)} isOpen={isOpen} />
+      {exceeded ? (
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Limite atingido</DialogTitle>
+            <DialogDescription>
+              O limite de médicos foi atingido. Por favor, remova um médico para
+              adicionar um novo.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      ) : (
+        <UpsertDoctorForm onSuccess={() => setIsOpen(false)} isOpen={isOpen} />
+      )}
     </Dialog>
   );
 };

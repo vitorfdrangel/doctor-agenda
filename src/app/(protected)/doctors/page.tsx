@@ -47,7 +47,7 @@ const DoctorsPage = async () => {
           <PageDescription>Gerencie seus médicos</PageDescription>
         </PageHeaderContent>
         <PageActions>
-          <AddDoctorButton />
+          <AddDoctorButton exceeded={doctors.length >= 3} />
         </PageActions>
       </PageHeader>
       <PageContent>
